@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>标记</title>
+</head>
+<body>
+    <div class="b" id="g">
+    </div>
+    <div class="c">
+
+    </div>
+</body>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .b {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0,0,0,0.1);
+        z-index: 30000;
+    }
+    .c {
+        width: 100vw;
+        height: 80vh;
+        background: aquamarine;
+    }
+</style>
+<script>
+    let x, y;
+    let ex, ey;
+    let flag = false;
+    let ele;
+    document.getElementById('g').addEventListener('mousedown', e => {
+        console.log(e);
+        x = e.x;
+        y = e.y;
+        flag = true;
+        ele = document.createElement('div');
+        ele.style.position = 'absolute';
+        ele.style.background = 'rgba(255,0,0,0.6)';
+        ele.style.top = y + 'px';
+        ele.style.left = x + 'px';
+        document.body.appendChild(ele);
+    });
+    document.getElementById('g').addEventListener('mousemove', e => {
+        if (flag === true) {
+            ex = e.x;
+            ey = e.y;
+            if (ex >= x) {
+                ele.style.width = (ex - x) + 'px';
+            } else {
+                ele.style.width = (x - ex) + 'px';
+                ele.style.left = ex + 'px';
+            }
+            if (ey >= y) {
+                ele.style.height = (ey - y) + 'px';
+            } else {
+                ele.style.height = (y - ey) + 'px';
+                ele.style.top = ey + 'px';
+            }
+        }
+    });
+    document.getElementById('g').addEventListener('mouseup', e => {
+        console.log(e);
+        if (flag === true) {
+            flag = false;
+        }
+    });
+</script>
+</html>

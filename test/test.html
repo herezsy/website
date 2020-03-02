@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+    <div class="container" id="frame">
+        <iframe class="login" src="/p/login.html"></iframe>
+    </div>
+</body>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        border: none;
+        outline: none;
+        cursor: default;
+    }
+    .container {
+        width: 475px;
+        height: 399px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        border-radius: 20px;
+    }
+    .login {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+<script>
+    function cancelLogin() {
+        document.getElementById('frame').style.display = 'none';
+    }
+</script>
+</html>

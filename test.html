@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tt</title>
+</head>
+<body>
+<a href="javascript:void(function() {
+        let ele = document.createElement('div');
+        let s = ele.style;
+        s.position = 'absolute';
+        s.top = '0';
+        s.left = '0';
+        s.width = document.body.offsetWidth.toString() + 'px';
+        s.height = document.body.offsetHeight.toString() + 'px';
+        s.overflow = 'hidden';
+        s.background = 'rgba(0,0,0,0.3)';
+        s.zIndex = '30000';
+        document.body.appendChild(ele);
+    })()">收藏后点击：删掉网页img元素</a>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录到 tozsy.com</title>
+</head>
+<link href="account.css" rel="stylesheet"/>
+<body>
+<div class="box">
+    <div class="boxContent">
+        <div class="boxTop">
+            <div class="boxTitle">
+                <p>登录到 tozsy.com</p>
+            </div>
+            <div class="boxBack" onClick="{
+                    window.parent.cancelLogin();
+                }">
+                <p>返回 ></p>
+            </div>
+        </div>
+        <div class="boxInner">
+            <div class="inputRow">
+                <input class="inputSingle" id="username" placeholder="用户名" />
+            </div>
+            <div class="inputRow">
+                <input class="inputSingle" type="password" id="password" placeholder="密码" />
+            </div>
+        </div>
+    </div>
+    <div class="boxOperation">
+        <div>
+            <p>继续登录代表您同意我们的相关条款</p>
+        </div>
+        <div class="boxConfirm" onclick="login()">
+            <p>登录</p>
+        </div>
+    </div>
+    <div class="boxTip" id="tipBox">
+        <p id="tip">用户名不能为空</p>
+    </div>
+</div>
+</body>
+<script>
+    let username = '';
+    let password = '';
+    let tipState = false;
+    function check() {
+        username = document.getElementById('username').value;
+        password = document.getElementById('password').value;
+        if (username === '') {
+            setTip('用户名不能为空');
+            return false;
+        } else if (password === '') {
+            setTip('密码不能为空');
+            return false;
+        }
+        return true
+    }
+    function setTip(str) {
+        document.getElementById('tip').innerText = str;
+        const b = document.getElementById('tipBox');
+        if (!tipState) {
+            b.style.animation = 'popUp 0.1s ease-out';
+            b.style.display = 'block';
+            tipState = true;
+        } else {
+            b.style.animation = 'shake 0.3s ease-in-out';
+            // b.style.animationIterationCount = '3';
+            setTimeout(() => {
+                b.style.animation = 'none'
+            }, 300);
+        }
+    }
+    function login() {
+        if (check()) {
+            const form = new FormData();
+            form.append('username', username);
+            form.append('password', password);
+            window.fetch('/zsy/auth/login', {
+                method: 'POST',
+                body: form,
+            }).then(r => r.json()).then(r => {
+                if (r.state === 'success') {
+                    window.location.href = '/p/successLogin.html';
+                } else {
+                    setTip('校验失败，请再次检查你的输入');
+                }
+            });
+        }
+    }
+</script>
+</html>

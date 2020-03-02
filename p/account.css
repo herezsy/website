@@ -1,0 +1,181 @@
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    border: none;
+    outline: none;
+}
+
+body {
+    cursor: default;
+}
+
+@keyframes popUp {
+    from {
+        bottom: -6vw;
+    }
+    to {
+        bottom: 0;
+    }
+}
+
+@keyframes shake {
+    0% {
+        left: -10vw;
+    }
+    12.5% {
+        left: 0;
+    }
+    37.5% {
+        left: -20vw;
+    }
+    50% {
+        left: -10vw;
+    }
+    62.5% {
+        left: 0;
+    }
+    87.5% {
+        left: -20vw;
+    }
+    100% {
+        left: -10vw;
+    }
+}
+
+.box {
+    position: relative;
+    overflow: hidden;
+    height: 84vw;
+    width: 100vw;
+}
+
+.boxTip {
+    position: absolute;
+    bottom: 0;
+    left: -10vw;
+    width: 120vw;
+    height: 6vw;
+    font-size: 3vw;
+    line-height: 6vw;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgb(255, 64, 64);
+    display: none;
+}
+
+.boxContent {
+    position: absolute;
+    width: 80vw;
+    top: 10vw;
+    left: 10vw;
+}
+
+.boxOperation {
+    position: absolute;
+    width: 80vw;
+    bottom: 10vw;
+    left: 10vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 2.8vw;
+}
+
+.boxConfirm {
+    background: rgba(66, 62, 255, 0.93);
+    height: 10vw;
+    width: 30vw;
+    color: rgba(255, 255, 255, 0.9);
+    border-radius: 1vw;
+    font-size: 4vw;
+    line-height: 10vw;
+    text-align: center;
+    cursor: pointer;
+}
+
+.boxTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.boxTitle {
+    font-size: 5.6vw;
+    color: rgba(0, 0, 0, 0.75);
+    font-weight: 700;
+}
+
+.boxBack {
+    font-size: 3.4vw;
+    color: rgb(255, 64, 64);
+    cursor: pointer;
+}
+
+.boxInner {
+    font-size: 3.6vw;
+    margin-top: 10vw;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.inputRow {
+    width: 80vw;
+    height: 12vw;
+    display: flex;
+    align-items: center;
+}
+
+.inputLeft {
+    position: relative;
+    width: 16vw;
+    height: 12vw;
+    text-align: left;
+    font-size: 4vw;
+    color: rgba(0, 0, 0, 0.6);
+    line-height: 12vw;
+    font-weight: 700;
+    padding-left: 2vw;
+}
+
+.inputRight {
+    width: 64vw;
+}
+
+.input {
+    width: 60vw;
+    height: 4vw;
+    font-size: 4vw;
+    line-height: 8vw;
+    padding: 2vw;
+    color: rgba(0, 0, 0, 0.75);
+    border-bottom: solid 0.2vw rgba(0, 0, 0, 0.3);
+}
+
+.inputSingle {
+    width: 100%;
+    height: 4vw;
+    font-size: 3.6vw;
+    line-height: 8vw;
+    padding: 2vw;
+    color: rgba(0, 0, 0, 0.75);
+    border-bottom: solid 0.2vw rgba(0, 0, 0, 0.3);
+}
+
+.choose {
+    position: absolute;
+    left: 0;
+    top: 12vw;
+    width: 20vw;
+    background: rgb(245, 245, 245);
+    border-radius: 1vw;
+    box-shadow: 0 0 3vw rgba(0, 0, 0, 0.3);
+    display: none;
+}
+
+.option {
+    width: 20vw;
+    text-align: center;
+    font-weight: 500;
+    font-size: 3.4vw;
+    line-height: 10vw;
+}
