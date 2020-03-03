@@ -13,43 +13,94 @@
 </body>
 <style>
     * {
-        margin: 0;
         padding: 0;
+        margin: 0;
+        list-style: none;
+        border: none;
+        outline: none;
+    }
+
+    body {
+        cursor: default;
     }
     .b {
         position: absolute;
         width: 100vw;
-        height: 100vh;
-        background: rgba(0,0,0,0.1);
-        z-index: 30000;
+        height: 130vh;
+        z-index: 10000;
     }
     .c {
         width: 100vw;
-        height: 80vh;
-        background: aquamarine;
+        height: 180vh;
+
+    }
+    .d {
+        position: absolute;
+        background: rgba(255,255,64,0.1);
+        border: solid 3px rgba(255,255,64,1);
+        z-index: 30000;
+    }
+    .f {
+        position: absolute;
+        background: rgb(255,255,255);
+        box-shadow: 0 0 10px rgba(0,0,0,0.8);
+        width: 16px;
+        height: 16px;
+        border-radius: 8px;
+        z-index: 20000;
+    }
+    .fw {
+        position: absolute;
+        width: 90px;
+        height: 40px;
+        background: blue;
+        border-radius: 20px 20px 20px 0;
+        background: rgb(178,178,178);
+        z-index: 30000;
+    }
+
+    /*注意要设置字体相同，input字体和p字体默认是不一样的！！*/
+    .hiddenWord {
+        font-size: 20px;
+        width: fit-content;
+        visibility: hidden;
+        white-space: nowrap;
+        font-family: "Microsoft YaHei UI", sans-serif;
+        background: blue;
+    }
+
+    input {
+        height: 20px;
+        padding: 10px 20px;
+        font-size: 20px;
+        font-family: "Microsoft YaHei UI", sans-serif;
+        background: none;
+        color: rgb(255,255,255);
     }
 </style>
 <script>
     let x, y;
     let ex, ey;
-    let flag = false;
+    let areaProcess = false;
+    let area = false;
+    let point = true;
     let ele;
     document.getElementById('g').addEventListener('mousedown', e => {
-        console.log(e);
-        x = e.x;
-        y = e.y;
-        flag = true;
-        ele = document.createElement('div');
-        ele.style.position = 'absolute';
-        ele.style.background = 'rgba(255,0,0,0.6)';
-        ele.style.top = y + 'px';
-        ele.style.left = x + 'px';
-        document.body.appendChild(ele);
+        if (area === true) {
+            x = e.pageX;
+            y = e.pageY;
+            areaProcess = true;
+            ele = document.createElement('div');
+            ele.className = 'd';
+            ele.style.top = y + 'px';
+            ele.style.left = x + 'px';
+            document.body.appendChild(ele);
+        }
     });
     document.getElementById('g').addEventListener('mousemove', e => {
-        if (flag === true) {
-            ex = e.x;
-            ey = e.y;
+        if (areaProcess === true) {
+            ex = e.pageX;
+            ey = e.pageY;
             if (ex >= x) {
                 ele.style.width = (ex - x) + 'px';
             } else {
@@ -66,8 +117,42 @@
     });
     document.getElementById('g').addEventListener('mouseup', e => {
         console.log(e);
-        if (flag === true) {
-            flag = false;
+        if (area === true) {
+            if (areaProcess === true) {
+                areaProcess = false;
+            }
+        } else if (point === true) {
+            console.log(e);
+            ele = document.createElement('div');
+            let ball = document.createElement('div');
+            ball.className = 'f';
+            ball.style.top = (e.pageY - 8) + 'px';
+            ball.style.left = (e.pageX - 8) + 'px';
+            ele.appendChild(ball);
+            let pan = document.createElement('div');
+            pan.className = 'fw';
+            pan.style.left = (e.pageX + 2) + 'px';
+            pan.style.top = (e.pageY - 40 - 16) + 'px';
+            let input = document.createElement('input');
+            input.value = 'hello';
+            let hidden = document.createElement('p');
+            hidden.className = 'hiddenWord';
+            document.body.appendChild(hidden);
+            input.onfocus = () => {
+                point = false;
+            };
+            input.oninput = () => {
+                hidden.innerText = input.value;
+                console.log(hidden.offsetWidth);
+                pan.style.width = (hidden.offsetWidth + 40) + 'px';
+                input.style.width = (hidden.offsetWidth + 40) + 'px';
+            };
+            input.onblur = () => {
+                point = true;
+            };
+            pan.appendChild(input);
+            ele.appendChild(pan);
+            document.body.appendChild(ele);
         }
     });
 </script>

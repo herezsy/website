@@ -41,6 +41,16 @@
 </div>
 </body>
 <script>
+    document.getElementById('username').addEventListener('keydown', e => {
+        if (e.key === 'Enter') {
+            login();
+        }
+    });
+    document.getElementById('password').addEventListener('keydown', e => {
+        if (e.key === 'Enter') {
+            login();
+        }
+    });
     let username = '';
     let password = '';
     let tipState = false;
