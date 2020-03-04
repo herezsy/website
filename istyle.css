@@ -323,9 +323,19 @@ a {
 .yetLogin {
     display: none;
     align-items: center;
+    justify-content: right;
+}
+
+.yetLogin p {
+    margin-left: 3vw;
 }
 
 .notLogin {
     display: none;
     align-items: center;
+    justify-content: right;
+}
+
+.notLogin p {
+    margin-left: 3vw;
 }

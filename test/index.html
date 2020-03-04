@@ -6,7 +6,7 @@
 </head>
 <body>
     <div class="container" id="frame">
-        <iframe class="login" src="/p/login.html"></iframe>
+        <iframe class="login" src="/p/codeSecond.html"></iframe>
     </div>
 </body>
 <style>
@@ -19,11 +19,13 @@
         cursor: default;
     }
     .container {
+        position: absolute;
+        top: 10px;
+        left: 10px;
         width: 475px;
         height: 399px;
         overflow: hidden;
         box-shadow: 0 0 10px rgba(0,0,0,0.3);
-        border-radius: 20px;
     }
     .login {
         width: 100%;
@@ -31,8 +33,13 @@
     }
 </style>
 <script>
-    function cancelLogin() {
+    function cancel() {
         document.getElementById('frame').style.display = 'none';
+    }
+    let token = '';
+    function secondAuth(str) {
+        token = str;
+        return '/p/passwordChange.html';
     }
 </script>
 </html>

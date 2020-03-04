@@ -39,11 +39,14 @@
             <path d="M955.733333 765.866667c0 0 0 2.133333 0 2.133333-12.8 21.333333-38.4 27.733333-57.6 14.933333-19.2-10.666667-27.733333-36.266667-17.066667-57.6l0 0c36.266667-64 57.6-136.533333 57.6-213.333333s-21.333333-151.466667-57.6-213.333333l0 0c-10.666667-19.2-4.266667-44.8 17.066667-57.6 21.333333-12.8 46.933333-4.266667 57.6 14.933333 0 0 0 2.133333 0 2.133333 42.666667 74.666667 68.266667 162.133333 68.266667 253.866667S998.4 691.2 955.733333 765.866667zM768 955.733333C768 955.733333 765.866667 955.733333 768 955.733333c-76.8 42.666667-164.266667 68.266667-256 68.266667s-179.2-25.6-253.866667-68.266667c0 0-2.133333 0-2.133333 0-21.333333-12.8-27.733333-38.4-14.933333-57.6 12.8-21.333333 38.4-27.733333 57.6-14.933333 0 0 0 0 2.133333 0l0 0C362.666667 917.333333 435.2 938.666667 512 938.666667s149.333333-21.333333 211.2-57.6l0 0c0 0 0 0 2.133333 0 21.333333-12.8 46.933333-4.266667 57.6 14.933333C795.733333 917.333333 789.333333 942.933333 768 955.733333zM727.466667 142.933333 727.466667 142.933333C663.466667 106.666667 590.933333 85.333333 512 85.333333s-151.466667 21.333333-213.333333 57.6l0 0c-19.2 10.666667-44.8 4.266667-57.6-17.066667C228.266667 106.666667 234.666667 81.066667 256 68.266667c0 0 2.133333 0 2.133333 0C332.8 25.6 420.266667 0 512 0s179.2 25.6 253.866667 68.266667c0 0 2.133333 0 2.133333 0 21.333333 12.8 27.733333 38.4 14.933333 57.6C772.266667 147.2 746.666667 153.6 727.466667 142.933333zM125.866667 782.933333C106.666667 795.733333 81.066667 789.333333 68.266667 768c0 0 0-2.133333 0-2.133333C25.6 691.2 0 603.733333 0 512s25.6-179.2 68.266667-253.866667c0 0 0-2.133333 0-2.133333 12.8-21.333333 38.4-27.733333 57.6-14.933333 21.333333 12.8 27.733333 38.4 14.933333 57.6 0 0 0 0 0 2.133333l0 0C106.666667 362.666667 85.333333 435.2 85.333333 512s21.333333 149.333333 57.6 211.2l0 0c0 0 0 0 0 2.133333C153.6 746.666667 147.2 772.266667 125.866667 782.933333z"
                   p-id="3663" fill="#515151"></path>
         </svg>
-        <div class="notLogin" id="notLogin" onclick="openLogin()">
-            <p>登录</p>
+        <div class="notLogin" id="notLogin">
+            <p onclick="openPasswordLogin()">登录</p>
+            <p onclick="openRegister()">注册</p>
         </div>
         <div class="yetLogin" id="yetLogin">
-            <p id="nk">aaaa</p>
+            <p id="nk" style="font-weight: 700"></p>
+            <p onclick="openPasswordChange()">更改密码</p>
+            <p onclick="logout()">退出</p>
         </div>
     </div>
     <div class="content">
@@ -86,17 +89,35 @@
         <path d="M841.142857 566.857143l0 274.285714q0 14.857143-10.857143 25.714286t-25.714286 10.857143l-219.428571 0 0-219.428571-146.285714 0 0 219.428571-219.428571 0q-14.857143 0-25.714286-10.857143t-10.857143-25.714286l0-274.285714q0-0.571429 2.857143-1.714286t2.857143-1.714286l328.571429-270.857143 328.571429 270.857143q0.571429 1.142857 0.571429 3.428571zm127.428571-39.428571l-35.428571 42.285714q-4.571429 5.142857-12 6.285714l-1.714286 0q-7.428571 0-12-4l-395.428571-329.714286-395.428571 329.714286q-6.857143 4.571429-13.714286 4-7.428571-1.142857-12-6.285714l-35.428571-42.285714q-4.571429-5.714286-4-13.428571t6.285714-12.285714l410.857143-342.285714q18.285714-14.857143 43.428571-14.857143t43.428571 14.857143l139.428571 116.571429 0-111.428571q0-8 5.142857-13.142857t13.142857-5.142857l109.714286 0q8 0 13.142857 5.142857t5.142857 13.142857l0 233.142857 125.142857 104q5.714286 4.571429 6.285714 12.285714t-4 13.428571z"
               p-id="2268" fill="#f5f5f5"></path>
     </svg>
-    <div class="lWord">
+    <div class="lWord" id="welcomeWord">
         <p>tozsy.com</p>
     </div>
 </div>
-<div class="frameContainer" id="frame">
-    <iframe class="frame" src="/p/login.html"></iframe>
+<div class="frameContainer" id="frameContainer">
+    <iframe class="frame" id="frame"></iframe>
 </div>
 </body>
 <script>
+    let t = new XMLHttpRequest();
+    t.open('GET', '/c/wallpaper', true);
+    t.onreadystatechange = () => {
+        if (t.readyState === 4 && t.status === 200) {
+            console.log(t.responseText);
+        }
+    };
+    t.send();
+    let successInner;
+    let cancelInner;
+    let token;
+    let secondAuthInner;
+    function success() { successInner() }
+    function cancel() { cancelInner() }
+    function secondAuth(str) { return secondAuthInner(str) }
+    // 注意跨框架只能使用函数
+    function getToken() { return token }
     window.fetch('c/wallpaper', {
-        method: "GET"
+        method: "GET",
+        credentials: 'include',
     }).then(res => res.json())
         .then(res => {
             document.getElementById("iBgImg").setAttribute("src", res['site']);
@@ -105,8 +126,8 @@
     function fetchInfo() {
         window.fetch('/zsy/auth/token', {
             method: 'POST',
+            credentials: 'include',
         }).then(r => r.json()).then(r => {
-            document.getElementById('loadingLogin').style.display = 'none';
             if (r.state === 'success') {
                 document.getElementById('nk').innerText = r.nk;
                 document.getElementById('notLogin').style.display = 'none';
@@ -118,24 +139,81 @@
             document.getElementById('loadingLogin').style.display = 'none';
         });
     }
-    function openLogin() {
-        document.getElementById('frame').style.display = 'block';
-    }
-    function cancelLogin() {
-        document.getElementById('frame').style.animation = 'fadeOut 0.1s ease-in';
-        setTimeout(() => {
-            document.getElementById('frame').style.display = 'none';
-            document.getElementById('frame').style.animation = 'fadeIn 0.1s ease-in';
-        }, 90);
-    }
-    function successLogin() {
-        document.getElementById('frame').style.animation = 'fadeOut 0.1s ease-in';
-        setTimeout(() => {
-            document.getElementById('frame').style.display = 'none';
-            document.getElementById('frame').style.animation = 'fadeIn 0.1s ease-in';
-        }, 90);
-        fetchInfo();
-    }
     fetchInfo();
+    function openRegister() {
+        successInner = () => {
+            fetchInfo();
+            document.getElementById('frameContainer').style.animation = 'fadeOut 0.1s ease-in';
+            setTimeout(() => {
+                document.getElementById('frameContainer').style.display = 'none';
+                document.getElementById('frameContainer').style.animation = 'fadeIn 0.1s ease-in';
+            }, 90);
+        };
+        cancelInner = () => {
+            document.getElementById('frameContainer').style.animation = 'fadeOut 0.1s ease-in';
+            setTimeout(() => {
+                document.getElementById('frameContainer').style.display = 'none';
+                document.getElementById('frameContainer').style.animation = 'fadeIn 0.1s ease-in';
+            }, 90);
+        };
+        document.getElementById('frame').setAttribute('src', '/p/rejectRegister.html');
+        document.getElementById('frameContainer').style.display = 'block';
+    }
+    function openPasswordLogin() {
+        successInner = () => {
+            fetchInfo();
+            document.getElementById('frameContainer').style.animation = 'fadeOut 0.1s ease-in';
+            setTimeout(() => {
+                document.getElementById('frameContainer').style.display = 'none';
+                document.getElementById('frameContainer').style.animation = 'fadeIn 0.1s ease-in';
+            }, 90);
+        };
+        cancelInner = () => {
+            document.getElementById('frameContainer').style.animation = 'fadeOut 0.1s ease-in';
+            setTimeout(() => {
+                document.getElementById('frameContainer').style.display = 'none';
+                document.getElementById('frameContainer').style.animation = 'fadeIn 0.1s ease-in';
+            }, 90);
+        };
+        document.getElementById('frame').setAttribute('src', '/p/passwordLogin.html');
+        document.getElementById('frameContainer').style.display = 'block';
+    }
+    function openPasswordChange() {
+        successInner = () => {
+            document.getElementById('frameContainer').style.animation = 'fadeOut 0.1s ease-in';
+            setTimeout(() => {
+                document.getElementById('frameContainer').style.display = 'none';
+                document.getElementById('frameContainer').style.animation = 'fadeIn 0.1s ease-in';
+            }, 90);
+            fetchInfo();
+        };
+        cancelInner = () => {
+            document.getElementById('frameContainer').style.animation = 'fadeOut 0.1s ease-in';
+            setTimeout(() => {
+                document.getElementById('frameContainer').style.display = 'none';
+                document.getElementById('frameContainer').style.animation = 'fadeIn 0.1s ease-in';
+            }, 90);
+        };
+        secondAuthInner = str => {
+            token = str;
+            return '/p/passwordChange.html';
+        };
+        document.getElementById('frame').setAttribute('src', '/p/passwordAuth.html');
+        document.getElementById('frameContainer').style.display = 'block';
+    }
+    function logout() {
+        window.fetch('/zsy/auth/logout', {
+            method: 'POST',
+            credentials: 'include',
+        }).then(r => r.json()).then(r => {
+            if (r.state === 'success') {
+                document.getElementById('notLogin').style.display = 'flex';
+                document.getElementById('yetLogin').style.display = 'none';
+            } else {
+                document.getElementById('yetLogin').style.display = 'flex';
+                document.getElementById('notLogin').style.display = 'none';
+            }
+        });
+    }
 </script>
 </html>

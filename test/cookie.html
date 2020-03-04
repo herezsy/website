@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cookie测试</title>
+</head>
+<body>
+<div class="container" id="frame">
+    <iframe class="login" src="/test/g/subcookie.html"></iframe>
+</div>
+<div class="other">
+    <p onclick="setCookie()">设置Cookie</p>
+    <p onclick="getCookie()">测试Cookie</p>
+    <p onclick="{
+        window.open('/p/passwordLogin.html')
+    }">打开小窗</p>
+    <p id="content"></p>
+</div>
+</body>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        border: none;
+        outline: none;
+        cursor: default;
+    }
+    .container {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 475px;
+        height: 399px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    .other {
+        position: absolute;
+        top: 500px;
+        left: 10px;
+    }
+    .login {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+<script>
+
+    function setCookie() {
+        window.fetch('/ti/setcookie', {
+            method: 'POST',
+            credentials: 'include',
+        }).then(r => r.json()).then(r => document.getElementById('content').innerText = r.cookie);
+    }
+    function getCookie() {
+        window.fetch('/ti/getcookie', {
+            method: 'POST',
+            credentials: 'include',
+        }).then(r => r.json()).then(r => document.getElementById('content').innerText = r.cookie);
+    }
+</script>
+</html>

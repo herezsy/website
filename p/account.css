@@ -161,21 +161,47 @@ body {
     border-bottom: solid 0.2vw rgba(0, 0, 0, 0.3);
 }
 
+.boxOther {
+    margin-top: 2vw;
+    text-align: left;
+    color: rgba(0,0,0,0.4);
+    font-size: 2.6vw;
+    line-height: 3vw;
+    height: 3vw;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
 .choose {
-    position: absolute;
-    left: 0;
-    top: 12vw;
-    width: 20vw;
-    background: rgb(245, 245, 245);
+    width: 80vw;
+    border: solid 0.2vw rgba(0,0,0,0.1);
     border-radius: 1vw;
-    box-shadow: 0 0 3vw rgba(0, 0, 0, 0.3);
-    display: none;
+    overflow: hidden;
 }
 
 .option {
-    width: 20vw;
-    text-align: center;
-    font-weight: 500;
+    cursor: pointer;
+    width: 80vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.option:hover {
+    background: rgba(255,255,0,0.2);
+}
+
+.optionLeft {
     font-size: 3.4vw;
     line-height: 10vw;
+    height: 10vw;
+    margin-left: 3vw;
 }
+
+.optionRight {
+    width: 2.6vw;
+    height: 8vw;
+    margin-right: 3vw;
+}
+

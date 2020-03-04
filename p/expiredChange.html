@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>登录成功</title>
+    <title>更改成功</title>
 </head>
 <link href="account.css" rel="stylesheet"/>
 <body>
@@ -10,15 +10,15 @@
     <div class="boxContent">
         <div class="boxTop">
             <div class="boxTitle">
-                <p>登录成功</p>
+                <p>更改取消</p>
             </div>
         </div>
         <div class="boxInner">
-            登录成功，稍后将自动返回...
+            <p>您长时间没有执行操作，为了您的账号安全，我们取消了这次更改，请重试。</p>
         </div>
     </div>
     <div class="boxOperation">
-        <div class="boxConfirm" onclick="window.parent.success()">
+        <div class="boxConfirm" onclick="next()">
             <p>完成</p>
         </div>
     </div>
@@ -28,8 +28,9 @@
 </div>
 </body>
 <script>
-    setTimeout(() => {
-        window.parent.success();
-    }, 1000);
+    // next 的动作
+    function next() {
+        window.parent.cancel();
+    }
 </script>
 </html>

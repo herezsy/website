@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>子页面</title>
+</head>
+<body>
+    <p onclick="setCookie()">设置Cookie</p>
+    <p onclick="getCookie()">测试Cookie</p>
+    <p id="content"></p>
+</body>
+<script>
+    function setCookie() {
+        window.fetch('/ti/setcookie', {
+            method: 'POST',
+            credentials: 'include',
+        }).then(r => r.json()).then(r => {
+            document.getElementById('content').innerText = r.cookie;
+        });
+    }
+    function getCookie() {
+        window.fetch('/ti/getcookie', {
+            method: 'POST',
+            credentials: 'include',
+        }).then(r => r.json()).then(r => document.getElementById('content').innerText = r.cookie);
+    }
+</script>
+</html>
