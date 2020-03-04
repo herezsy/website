@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>使用手机验证码登录</title>
+    <title>请输入验证码</title>
 </head>
 <link href="account.css" rel="stylesheet"/>
 <body>
@@ -10,7 +10,7 @@
     <div class="boxContent">
         <div class="boxTop">
             <div class="boxTitle">
-                <p>使用手机验证码登录/注册</p>
+                <p>请输入验证码注册</p>
             </div>
             <div class="boxBack" onClick="{
                     window.parent.cancel();
@@ -20,11 +20,11 @@
         </div>
         <div class="boxInner">
             <div class="inputRow">
-                <input class="inputSingle" id="username" placeholder="用户名 / 中国手机号码" />
+                <input class="inputSingle" id="code" placeholder="验证码" />
             </div>
         </div>
-        <div class="boxOther" onclick="window.location.href = '/p/processLogin.html'">
-            <p>选择其他登录方式</p>
+        <div class="boxOther" onclick="window.location.href = '/p/codeLogin.html'">
+            <p>收不到？返回重试</p>
             <div style="width: 2vw; height: 3vw; padding-left: 0.4vw; padding-top: 0.6vw">
                 <svg t="1583305402712" style="width: 2vw; height: 3vw" viewBox="0 0 1024 1024" version="1.1"
                      xmlns="http://www.w3.org/2000/svg" p-id="1310" width="48" height="48">
@@ -36,11 +36,10 @@
     </div>
     <div class="boxOperation">
         <div>
-            <p>未注册的手机号码将被自动注册</p>
-            <p>继续登录代表您同意我们的相关条款</p>
+            <p>继续注册代表您同意我们的相关条款</p>
         </div>
         <div class="boxConfirm" onclick="next()" id="confirm">
-            <p>发送验证码</p>
+            <p>注册并登录</p>
         </div>
     </div>
     <div class="boxTip" id="tipBox">
@@ -50,7 +49,7 @@
 </body>
 <script>
     // 添加监听
-    document.getElementById('username').addEventListener('keydown', e => {
+    document.getElementById('code').addEventListener('keydown', e => {
         if (e.key === 'Enter') {
             next();
         }
@@ -69,10 +68,16 @@
     let nextState = false;
     // 自定义变量
     let username = '';
+    let code = '';
     // 自定义函数
     function check() {
-        username = document.getElementById('username').value;
-        if (username === '') {
+        username = window.location.hash.slice(1);
+        console.log(username);
+        code = document.getElementById('code').value;
+        if (code === '') {
+            setTip('验证码 不能为空');
+            return false;
+        } else if (username === '') {
             setTip('用户名 / 中国手机号码 不能为空');
             return false;
         }
@@ -87,9 +92,8 @@
             tipState = true;
         } else {
             b.style.animation = 'shake 0.3s ease-in-out';
-            // b.style.animationIterationCount = '3';
             setTimeout(() => {
-                b.style.animation = 'none'
+                b.style.animation = 'none';
             }, 300);
         }
     }
@@ -97,8 +101,9 @@
         document.getElementById('confirm').style.background = 'rgba(64,64,64)';
         if (check()) {
             const form = new FormData();
-            form.append('username', username);
-            window.fetch('/zsy/auth/getcode', {
+            form.append('phone', username);
+            form.append('code', code);
+            window.fetch('/zsy/auth/register', {
                 method: 'POST',
                 body: form,
                 credentials: 'include',
@@ -107,13 +112,9 @@
                 return r.json();
             }).then(r => {
                 if (r.state === 'success') {
-                    if (r.user === 'user') {
-                        window.location.href = '/p/codeLoginSecond.html' + '#' + username;
-                    } else if (r.user === 'register'){
-                        window.location.href = '/p/rejectRegister.html' + '#' + username;
-                    }
+                    window.location.href = '/p/successLogin.html';
                 } else {
-                    setTip('发送失败，请再次检查你的输入');
+                    setTip('校验失败，请再次检查你的输入');
                 }
             });
         } else {

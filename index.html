@@ -40,8 +40,7 @@
                   p-id="3663" fill="#515151"></path>
         </svg>
         <div class="notLogin" id="notLogin">
-            <p onclick="openPasswordLogin()">登录</p>
-            <p onclick="openRegister()">注册</p>
+            <p onclick="openPasswordLogin()">登录 / 注册</p>
         </div>
         <div class="yetLogin" id="yetLogin">
             <p id="nk" style="font-weight: 700"></p>
@@ -140,25 +139,6 @@
         });
     }
     fetchInfo();
-    function openRegister() {
-        successInner = () => {
-            fetchInfo();
-            document.getElementById('frameContainer').style.animation = 'fadeOut 0.1s ease-in';
-            setTimeout(() => {
-                document.getElementById('frameContainer').style.display = 'none';
-                document.getElementById('frameContainer').style.animation = 'fadeIn 0.1s ease-in';
-            }, 90);
-        };
-        cancelInner = () => {
-            document.getElementById('frameContainer').style.animation = 'fadeOut 0.1s ease-in';
-            setTimeout(() => {
-                document.getElementById('frameContainer').style.display = 'none';
-                document.getElementById('frameContainer').style.animation = 'fadeIn 0.1s ease-in';
-            }, 90);
-        };
-        document.getElementById('frame').setAttribute('src', '/p/rejectRegister.html');
-        document.getElementById('frameContainer').style.display = 'block';
-    }
     function openPasswordLogin() {
         successInner = () => {
             fetchInfo();
@@ -175,7 +155,7 @@
                 document.getElementById('frameContainer').style.animation = 'fadeIn 0.1s ease-in';
             }, 90);
         };
-        document.getElementById('frame').setAttribute('src', '/p/passwordLogin.html');
+        document.getElementById('frame').setAttribute('src', '/p/codeLogin.html');
         document.getElementById('frameContainer').style.display = 'block';
     }
     function openPasswordChange() {
